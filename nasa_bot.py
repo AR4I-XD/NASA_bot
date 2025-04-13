@@ -12,4 +12,4 @@ print(bot.get_me())
 
 updates = bot.get_updates()
 
-bot.send_message(text='Helo', chat_id=CHAT_ID)
+bot.send_photo(chat_id=CHAT_ID, photo=open('images/nasa_apod_26.jpg', 'rb'))
