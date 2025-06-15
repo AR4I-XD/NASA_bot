@@ -10,12 +10,15 @@ def get_file_extension(file_url):
     return file_extension
 
 
-def download_image(url, filename):
-    DIRECTORY = "images"
-    if not os.path.exists(DIRECTORY):
-        os.makedirs(DIRECTORY)
-    filename = os.path.join(DIRECTORY, filename)
+def download_image(url, filename, directory):
+    os.makedirs(directory, exist_ok=True)
+    filename = os.path.join(directory, filename)
     response = requests.get(url)
     response.raise_for_status()
     with open(filename, 'wb') as file:
         file.write(response.content)
+
+
+def send_file(path, TG_CHAT_ID, bot):
+    with open(path, 'rb') as file:
+        bot.send_photo(chat_id=TG_CHAT_ID, photo=file)
