@@ -19,6 +19,6 @@ def download_image(url, filename, directory):
         file.write(response.content)
 
 
-def send_file(path, TG_CHAT_ID, bot):
+def send_file(path, tg_chat_id, bot):
     with open(path, 'rb') as file:
-        bot.send_photo(chat_id=TG_CHAT_ID, photo=file)
+        bot.send_photo(chat_id=tg_chat_id, photo=file)

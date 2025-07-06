@@ -5,8 +5,7 @@ import argparse
 
 
 def fetch_spacex_last_launch(args):      
-    if not os.path.exists(args.directory):
-        os.makedirs(args.directory)
+    os.makedirs(args.directory, exist_ok=True)
 
     url = f"https://api.spacexdata.com/v5/launches/{args.id}"
     
