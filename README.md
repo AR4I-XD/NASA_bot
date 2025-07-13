@@ -8,7 +8,7 @@
 
 ```
 
-├── fetch_spacex_last_launch.py    # Скачать фото последнего (или указанного) запуска SpaceX
+├── get_spacex_launch.py           # Скачать фото последнего (или указанного) запуска SpaceX
 ├── get_nasa_apod.py               # Скачать случайную подборку фото дня (APOD) от NASA
 ├── get_nasa_epic.py               # Скачать архивные снимки Земли (EPIC) от NASA
 ├── support_scripts.py             # Вспомогательные функции (скачивание, получение расширения)
@@ -63,7 +63,7 @@
 
 - **Последний (или указанный) запуск SpaceX**  
   ```bash
-  python fetch_spacex_last_lunch.py [ID_запуска] [Папка сохранения]
+  python get_spacex_launch.py [ID_запуска] [Папка сохранения]
   ```  
   По умолчанию скачиваются фото последнего запуска (`default="latest"`).
 
