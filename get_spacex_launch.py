@@ -4,7 +4,7 @@ from support_scripts import get_file_extension, download_image
 import argparse
 
 
-def fetch_spacex_last_launch(args):      
+def get_spacex_launch(args):      
     os.makedirs(args.directory, exist_ok=True)
 
     url = f"https://api.spacexdata.com/v5/launches/{args.id}"
@@ -28,4 +28,4 @@ if __name__ == "__main__":
                         default="images", type=str)
 
     args = parser.parse_args()
-    fetch_spacex_last_launch(args)
+    get_spacex_launch(args)

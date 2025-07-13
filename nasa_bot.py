@@ -5,6 +5,7 @@ import random
 import time
 import argparse
 from support_scripts import send_file
+from telegram.error import NetworkError
 
 def main():
     load_dotenv()
@@ -20,12 +21,23 @@ def main():
     args = parser.parse_args()
     bot = telegram.Bot(token=tg_api_token)
 
-    images = os.listdir(args.directory)
-    random.shuffle(images)
-    
-    for img in images:
-        send_file(os.path.join(args.directory, img), tg_chat_id, bot)
-        time.sleep(int(tg_time_delay) * 3600)
+    while True:
+        images = os.listdir(args.directory)
+        random.shuffle(images)
+
+        for img in images:
+            image_path = os.path.join(args.directory, img)
+
+            while True:
+                try:
+                    send_file(image_path, tg_chat_id, bot)
+                    break
+                except NetworkError as error:
+                    print(f"Ошибка соединения: {error}.Повтор через 10 секунд")
+                    time.sleep(10)
+
+            time.sleep(tg_time_delay * 3600)
+
 
 if __name__ == "__main__":
     main()
