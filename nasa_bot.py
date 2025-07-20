@@ -11,7 +11,7 @@ def main():
     load_dotenv()
     tg_api_token = os.environ["TG_API_TOKEN"]
     tg_chat_id = os.environ["TG_CHAT_ID"]
-    tg_time_delay = os.getenv("TG_TIME_DELAY", "4")
+    tg_time_delay = int(os.getenv("TG_TIME_DELAY", "4"))
     parser = argparse.ArgumentParser(
         description="Программа отправляет случайное фото из указанной папки"
     )

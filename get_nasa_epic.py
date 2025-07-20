@@ -5,7 +5,7 @@ from support_scripts import get_file_extension, download_image
 import argparse
 from dotenv import load_dotenv
 from urllib.parse import urljoin
-from requests import Request
+from requests import Request, exceptions
 
 def get_nasa_epic(api_key, directory):
     base_api_url = "https://api.nasa.gov/EPIC/api/natural/images"
@@ -36,12 +36,14 @@ def get_nasa_epic(api_key, directory):
 
         try:
             download_image(image_url, filename, directory)
-        except Exception as e:
-            print(f"Не удалось скачать {image_url}: {e}")
+        except exceptions.RequestException as req_err:
+            print(f"Сетевая ошибка при скачивании {image_url}: {req_err}")
+        except OSError as os_err:
+            print(f"Ошибка файловой системы при сохранении {filename}: {os_err}")
 
 if __name__ == "__main__":
     load_dotenv()
-    nasa_api_key = os.environ["NASA_API_KEY"]
+    nasa_api_key = os.environ['NASA_API_KEY']
 
     parser = argparse.ArgumentParser(
         description="Программа скачивает изображения из архива EPIC"
